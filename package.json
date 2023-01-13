@@ -1,0 +1,47 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc node src/server.js",
+    "tests": "nyc --reporter=html --reporter=text mocha --require @babel/register ./src/Test/*.test.js --timeout 1000000 --exit",
+    "dev": "nodemon -L --exec babel-node src/server.js",
+    "migrate": "npx sequelize-cli db:migrate",
+    "migrate-undo": " npx sequelize-cli db:migrate:undo",
+    "migrate-undo-all": "npx sequelize-cli db:migrate:undo:all"
+  },
+  "author": "Rachel",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.26.0",
+    "sequelize-cli": "^6.5.2",
+    "swagger-jsdoc": "^6.2.7",
+    "swagger-ui-express": "^4.6.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.20.5",
+    "@babel/node": "^7.20.5",
+    "@babel/plugin-transform-runtime": "^7.19.6",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/register": "^7.18.9",
+    "nodemon": "^2.0.20"
+  }
+}
