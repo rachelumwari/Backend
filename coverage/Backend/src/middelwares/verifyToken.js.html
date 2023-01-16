@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.9% </span>
+                <span class="strong">86.95% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>20/22</span>
+                <span class='fraction'>20/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.33% </span>
+                <span class="strong">51.72% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>16/30</span>
+                <span class='fraction'>15/29</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">93.75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/15</span>
+                <span class='fraction'>15/16</span>
             </div>
         
             
@@ -84,24 +84,40 @@
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">522x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">42x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -110,19 +126,27 @@
 dotenv.config();
 &nbsp;
 const verifyToken=async(req, res, next)=&gt;{
-const token=req.headers['authorization']
-const auth = token.split(" ")[1]
-<span class="missing-if-branch" title="else path not taken" >E</span>// const token=authHeader &amp;&amp; authHeader.split('')[1]
-if (!auth<span class="cstat-no" title="statement not covered" >) {</span>
-    return res.status(403).send("A token is required for authentication");
-  }
-  try {
-    const decoded = jwt.verify(auth, process.env.JWT_SECRET);
-    req.user = decoded;<span class="cstat-no" title="statement not covered" ><span class="branch-2 cbranch-no" title="branch not covered" ></span></span>
-  } catch (err) {
-    return res.status(401).send("Invalid Token");
-  }
-  return next()<span class="branch-4 cbranch-no" title="branch not covered" >;</span>
+try {
+&nbsp;
+  const token=req.headers['authorization']
+  const auth = token.split(" ")[1]
+  <span class="missing-if-branch" title="else path not taken" >E</span>// const token=authHeader &amp;&amp; authHeader.split('')[1]
+  if (!auth<span class="cstat-no" title="statement not covered" >) {</span>
+      return res.status(403).send("A token is required for authentication");
+    }
+    try {
+      const decoded = jwt.verify(auth, process.env.JWT_SECRET);
+      req.user = decoded;
+    } catch (err) {
+     
+    }
+    return next()<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="branch-2 cbranch-no" title="branch not covered" >;</span></span></span>
+  
+} catch (error) {
+  return res.status(403).send("Token not provided")<span class="branch-3 cbranch-no" title="branch not covered" >;</span>
+  
+}
+ 
 &nbsp;
 }
 &nbsp;
@@ -133,7 +157,7 @@ export default verifyToken;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-01-12T19:12:01.816Z
+                at 2023-01-16T06:58:19.571Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

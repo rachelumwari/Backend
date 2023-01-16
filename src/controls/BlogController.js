@@ -75,7 +75,7 @@ static async UpdateBlog(req, res){
         }else{
             res.status(404).json({
                 stastus:404,
-                message:"Blog not Find"
+                message:"Blog is not Find"
             });
         } 
     } catch (error) {
@@ -103,6 +103,36 @@ static async getBlog(req, res) {
         });
     }
   }
+
+
+  static async deleteBlog(req, res){
+    try {
+        const modelId = req.params.id
+        const findBlog = await blogs.findOne({
+            where: { id: modelId}
+        });
+        if(findBlog){
+            const deleteDate = await blogs.destroy({
+                where: {id:modelId}
+            });
+            res.status(200).json({
+                status: 200,
+                message:"Blog Deleted Successful",
+            });
+        }
+        else{
+            res.status(404).json({
+                status:404,
+                message:"Blog is  not found"
+            })
+        }            
+    } catch (error) {
+        res.status(500).json({
+            status:500,
+            message:"server problen :" + error.message
+        });
+    }
+}
 
 //   static async CountLikandComment(req,res){
 //     try {   

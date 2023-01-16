@@ -110,7 +110,7 @@ describe("Blog API test", () => {
         });
         
   
-        describe('/deleteBlog', () => {
+        describe('/deleteblog', () => {
             it('Delete the blog', (done) => {
             chai.request(app)
                 .delete(`/Blog/deleteblog/${id}`)
@@ -119,7 +119,7 @@ describe("Blog API test", () => {
                 // console.log(res)
                 expect(res.statusCode).to.equal(200);
                 expect(res.body.status).to.equal(200);
-                expect(res.body.message).to.equal("Blog Deleted");
+                expect(res.body.message).to.equal("Blog Deleted Successful");
                 done();
                 });
             });
