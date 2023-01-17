@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "backend",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "nyc node src/server.js",
     "tests": "nyc --reporter=html --reporter=text mocha --require @babel/register ./src/Test/*.test.js --timeout 1000000 --exit",
@@ -10,7 +10,7 @@
     "migrate": "npx sequelize-cli db:migrate",
     "migrate-undo": " npx sequelize-cli db:migrate:undo",
     "migrate-undo-all": "npx sequelize-cli db:migrate:undo:all",
-    "start":"node server.js"
+    "start": "npm run migrate && babel-node ./src/server.js"
   },
   "author": "Rachel",
   "license": "ISC",
