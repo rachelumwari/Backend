@@ -18,7 +18,7 @@ static async signup(req,res){
        if(checkUser){
            return res.status(400).json({
                status:400,
-               message:"user with this mail already exit"
+               message:"Bad request"
            })
        }
        else{
@@ -148,7 +148,7 @@ static async getUsers(req, res) {
         else{
             res.status(404).json({
                 status:404,
-                message:"User Account not found"
+                message:"The requested resource does not exist"
             })
         }            
     } catch (error) {
@@ -182,7 +182,7 @@ static async UpdateUser(req, res){
         }else{
             res.status(404).json({
                 stastus:404,
-                message:"User account not Find"
+                message:"The requested resource does not exist"
             });
         }
     } catch (error) {
@@ -210,7 +210,7 @@ static async findUserById(req,res){
       return res.status(400).json({
         responseCode:400,
         status:"failed",
-        message:"User not found"
+        message:"Bad request"
       })
         
     } catch (error) {
@@ -232,7 +232,7 @@ static async Login(req, res){
             if(!req.user){
                 res.status(404).json({
                     status: 404,
-                    message:"Account don't exit"
+                    message:"The requested resource does not exist"
                 })
             }
             else{
@@ -262,7 +262,7 @@ static async Login(req, res){
                     else{
                         return res.status(400).json({
                             stastus: 400,
-                            message: "Invalid Password ",
+                            message: "Bad request",
                             data:findUser,
                             token:token
 
@@ -274,7 +274,7 @@ static async Login(req, res){
                     else{
                         return res.status(400).json({
                             stastus: 400,
-                            message: "Invalid Email ",
+                            message: "Bad request",
                             data:findUser,
                             token:token
 

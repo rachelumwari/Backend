@@ -6,7 +6,7 @@ import { describe, it } from 'mocha';
 
 chai.use(chaiHttp);
 
-describe('/signup', () => {
+ describe('/signup', () => {
   it('it should create a user', (done) => {
     chai.request(app)
       .post('/User/signup/')
@@ -24,10 +24,10 @@ describe('/signup', () => {
         done();
       });
   });
-});
+ });
 
 
-it('it should not signup when password is not equal to six character', (done) => {
+ it('it should not signup when password is not equal to six character', (done) => {
   chai.request(app)
     .post('/User/signup/')
     .send({
@@ -42,9 +42,9 @@ it('it should not signup when password is not equal to six character', (done) =>
       expect(res.body.error).to.equal(`"password" is not allowed to be empty`);
       done();
     });
-});
+ });
 
-it('it should not signup when email is empty', (done) => {
+ it('it should not signup when email is empty', (done) => {
   chai.request(app)
     .post('/User/signup/')
     .send({
@@ -59,9 +59,9 @@ it('it should not signup when email is empty', (done) => {
       expect(res.body.error).to.equal(`"email" is not allowed to be empty`);
       done();
     });
-});
+ });
 
-it('it should not signup when password is not equal to six character', (done) => {
+ it('it should not signup when password is not equal to six character', (done) => {
   chai.request(app)
     .post('/User/signup/')
     .send({
@@ -76,11 +76,11 @@ it('it should not signup when password is not equal to six character', (done) =>
       expect(res.body.error).to.equal(`"Fullname" is not allowed to be empty`);
       done();
     });
-});
+ });
 
 
-let token,id
-describe("USER API test", () => {
+ let token,id
+ describe("USER API test", () => {
   before((done) => {
     chai.request(app)
       .post('/User/Login/')
@@ -93,7 +93,7 @@ describe("USER API test", () => {
         token=res.body.token
         done();
       });       
-});
+ });
 
   describe('/GET', () => {
     it('it should GET all users', (done) => {

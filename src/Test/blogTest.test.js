@@ -44,6 +44,25 @@ describe("Blog API test", () => {
             });
           });
 
+
+        //   it('Create a negative Test', (done) => {
+        //     chai.request(app)
+        //       .post('/Blog/addblog/')
+        //     //   .set({ "Authorization": `Bearer ${token}` })
+        //       .send({
+        //         'title':'Songs Fav',
+        //         'content':'content of content'
+        //       })
+        //       .end((err, res) => {
+        //         console.log(res)
+        //           expect(res.statusCode).to.equal(403);
+        //           expect(res.body.status).to.equal(403);
+        //           expect(res.body.error).to.equal("Token not provided");
+        //           id = res.body.data.id
+        //           done();
+        //       });
+        //   });
+
         it('it should not create a new blog if title not provided', (done) => {
             chai.request(app)
             .post('/Blog/addblog/')

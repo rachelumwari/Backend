@@ -40,7 +40,7 @@ static async addBlogs(req,res){
         else{
             res.status(404).json({
                 status:404,
-                message:"Blog not found"
+                message:"The requested resource does not exist"
             })
         }
 
@@ -75,7 +75,7 @@ static async UpdateBlog(req, res){
         }else{
             res.status(404).json({
                 stastus:404,
-                message:"Blog is not Find"
+                message:"The requested resource does not exist"
             });
         } 
     } catch (error) {
@@ -121,9 +121,9 @@ static async getBlog(req, res) {
             });
         }
         else{
-            res.status(404).json({
-                status:404,
-                message:"Blog is  not found"
+            res.status(400).json({
+                status:400,
+                message:"Bad request"
             })
         }            
     } catch (error) {
