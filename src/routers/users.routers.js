@@ -33,7 +33,7 @@ const router =Router();
  *        "201":
  *          description: Signup successfuly
  *        "400":
- *          description:  Conflict
+ *          description:  Bad request
  *        "500":
  *          description: There is an internal server error
  *
@@ -76,7 +76,7 @@ router.post("/signup",signupValidation,UserControl.signup)
  *        "201":
  *          description: All Users retrieved successfuly
  *        "400":
- *          description: Not User retrieved
+ *          description: Bad request
  *        "500":
  *          description: There is an internal server error
  *
@@ -153,7 +153,7 @@ router.put("/UpdateUser/:id",UserControl.UpdateUser)
  *        "201":
  *          description: Delete user successfuly
  *        "400":
- *          description: Not User found
+ *          description: Bad request
  *        "500":
  *          description: There is an internal server error
  *
@@ -180,7 +180,7 @@ router.get("/findUserById/:id",UserControl.findUserById)
  *        "201":
  *          description: All blog posts retrieved successfuly
  *        "400":
- *          description: Not blog post retrieved
+ *          description: Bad request
  *        "500":
  *          description: There is an internal server error
  *
@@ -222,7 +222,7 @@ router.post("/Login",checkUser,UserControl.Login)
  *        "201":
  *          description: like blog successfuly
  *        "400":
- *          description: Not like found
+ *          description: Bad request
  *        "500":
  *          description: There is an internal server error
  *
@@ -246,7 +246,7 @@ router.post("/like/:id",UserControl.Like)
  *        "201":
  *          description: comment blog successfuly
  *        "400":
- *          description: Not comment found
+ *          description: Bad request
  *        "500":
  *          description: There is an internal server error
  *

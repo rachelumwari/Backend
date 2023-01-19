@@ -32,7 +32,7 @@ import{
  *        "201":
  *          description: All blog posts retrieved successfuly
  *        "400":
- *          description: Not blog post retrieved
+ *          description: Bad request
  *        "500":
  *          description: There is an internal server error
  *
@@ -72,7 +72,7 @@ router.post("/addblog",verifyToken,isAdmin,blogValidation,BlogController.addBlog
  *        "201":
  *          description: All blog posts retrieved successfuly
  *        "400":
- *          description: Not blog post retrieved
+ *          description: Bad request
  *        "500":
  *          description: There is an internal server error
  *
@@ -141,7 +141,7 @@ router.put("/updateblog/:id",verifyToken,isAdmin,BlogController.UpdateBlog);
  *        "201":
  *          description: All blog posts retrieved successfuly
  *        "400":
- *          description: Not blog post retrieved
+ *          description: Bad request
  *        "500":
  *          description: There is an internal server error
  *
