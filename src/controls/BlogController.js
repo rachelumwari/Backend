@@ -1,5 +1,5 @@
 import Models from  "../db/models"
-const {blogs}=Models;  
+const {blogs,comments}=Models;  
 import { Sequelize } from "sequelize";
 
 class BlogController{
@@ -138,7 +138,11 @@ static async getBlogId(req, res){
     try {
         const modelId =req.params.id
         const BlogData=await blogs.findOne({
-            where:{id:modelId}
+            where:{id:modelId},
+            include: {
+                model: comments,
+                as:"comments"
+              },
           })
           return res.status(200).json({
             responseCode:200,

@@ -11,6 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      blogs.hasMany(models.comments,{
+        foreignKey:"blogId",
+        as:"comments",
+        onDelete: "cascade"
+      })
+
+      blogs.hasMany(models.likes,{
+        foreignKey:"blogId",
+        as:"likes",
+        onDelete:"cascade"
+      })
     }
   }
   blogs.init({
