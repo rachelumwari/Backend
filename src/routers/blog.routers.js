@@ -152,6 +152,6 @@ router.get("/getblog",BlogController.getBlog);
 
 // router.get("/total",BlogController.CountLikandComment);
 
-router.get("/getblog/:id",);
+router.get("/getblog/:id",BlogController.getBlogId);
 
 export default router

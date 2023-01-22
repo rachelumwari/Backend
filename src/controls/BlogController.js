@@ -134,6 +134,26 @@ static async getBlog(req, res) {
     }
 }
 
+static async getBlogId(req, res){
+    try {
+        const modelId =req.params.id
+        const BlogData=await blogs.findOne({
+            where:{id:modelId}
+          })
+          return res.status(200).json({
+            responseCode:200,
+            status:"successs",
+            data:BlogData
+          })
+      } catch (error) {
+        return res.status(500).json({
+            responseCode:500,
+            status: 'Failed',
+            message: error.message 
+            });
+      }
+    }
+
 //   static async CountLikandComment(req,res){
 //     try {   
            

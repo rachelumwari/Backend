@@ -79,7 +79,7 @@ chai.use(chaiHttp);
  });
 
 
- let token,id
+ let token,id,a
  describe("USER API test", () => {
   before((done) => {
     chai.request(app)
@@ -106,6 +106,16 @@ chai.use(chaiHttp);
     });
   });
 
+  it('should be server error', (done) => {
+    chai.request(app)
+    .get(`/User/getUsers/${a}`)
+        .end((err, res) => {
+          console.log(res)
+            expect(res.statusCode).to.equal(500);
+            done();
+        });
+  });
+
   describe('/GET', () => {
     it('it should GET a single  user', (done) => {
       chai.request(app)
@@ -117,31 +127,65 @@ chai.use(chaiHttp);
     });
   });
 
+  it('should user not found', (done) => {
+    chai.request(app)
+        .get('/User/findUserById/123')
+        .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body.message).to.equal("Bad request");
+            done();
+        });
+  });
+
+    it('should be server error', (done) => {
+      chai.request(app)
+          .get(`/User/findUserById/${a}`)
+          .end((err, res) => {
+              expect(res.statusCode).to.equal(500);
+              done();
+          });
+    });
+
+
   describe('update user info', () => {
     it('it should update user info', (done) => {
       chai.request(app)
         .put(`/User/UpdateUser/${id}`)
-        // .set({ "Authorization": `Bearer ${token}` })
         .send({
           'Fullname':'Gloria Kai'
         })
         .end((err, res) => {
-          // console.log(res)
           expect(res.statusCode).to.equal(200);
-          // expect(res.body.status).to.equal(200);
-          // expect(res.body.message).to.equal("User Account Deleted");
           done();
         });
     });
   });
 
+    it('user update not found', (done) => {
+      chai.request(app)
+          .put('/User/UpdateUser/145')
+          .end((err, res) => {
+              expect(res.statusCode).to.equal(404);
+              expect(res.body.message).to.equal("The requested resource does not exist");
+              done();
+          });
+  });
+
+  it('should be server error', (done) => {
+    chai.request(app)
+    .put(`/User/UpdateUser/${a}`)
+        .end((err, res) => {
+            expect(res.statusCode).to.equal(500);
+            done();
+        });
+  });
+  
   describe('/deleteUser', () => {
     it('it should delete a user', (done) => {
       chai.request(app)
         .delete(`/User/deleteUser/${id}`)
         .set({ "Authorization": `Bearer ${token}` })
         .end((err, res) => {
-          // console.log(res)
           expect(res.statusCode).to.equal(200);
           expect(res.body.status).to.equal(200);
           expect(res.body.message).to.equal("User Account Deleted");
@@ -150,21 +194,29 @@ chai.use(chaiHttp);
     });
   });
 
+    it('User not found', (done) => {
+      chai.request(app)
+      .delete('/User/deleteUser/224')
+      .set({ "Authorization": `Bearer ${token}` })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(404);
+        expect(res.body.message).to.equal("The requested resource does not exist");
+        done();
+      });
+    });
+
+  it('should be server error', (done) => {
+    chai.request(app)
+    .delete(`/User/deleteUser/${a}`)
+    .set({ "Authorization": `Bearer ${token}` })
+        .end((err, res) => {
+            expect(res.statusCode).to.equal(500);
+            done();
+        });
+  });
+
 });
 
-// describe('/like', () => {
-//   it('it should add liketo blog', (done) => {
-//     chai.request(app)
-//       .post('/User/signup/')
-//       .end((err, res) => {
-//         // console.log(res)
-//         expect(res.statusCode).to.equal(200);
-//         expect(res.body.status).to.equal(200);
-//         expect(res.body.message).to.equal("account created successfully");
-//         id = res.body.data.id
-//         done();
-//       });
-//   });
-// });
+
 
 

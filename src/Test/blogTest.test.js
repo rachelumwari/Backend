@@ -6,9 +6,9 @@ import { describe, it } from 'mocha';
 
 chai.use(chaiHttp);
 
-// var token,id
+var token,id,a
 describe("Blog API test", () => {
-    var token,id
+    // var token,id
     before((done) => {
         chai.request(app)
         .post('/User/Login/')
@@ -108,6 +108,44 @@ describe("Blog API test", () => {
                 });
             });
         });
+
+         // ============
+
+  it('should create like count', (done) => {
+    chai.request(app)
+    .post(`/User/like/61`)
+    .end((err, res) => {
+    //   console.log(res)/
+      expect(res.statusCode).to.equal(200);
+      expect(res.body.message).to.equal("like and update complent");
+      // expect(res.body.data.like).to.be.a('number');
+      done();
+    });
+  });
+  
+  it('Blog not found', (done) => {
+    chai.request(app)
+    .post(`/User/like/222`)
+    .end((err, res) => {
+    //   console.log(res)
+      expect(res.statusCode).to.equal(404);
+      expect(res.body.message).to.equal("Blog not found");
+      done();
+    });
+  });
+
+  it('should be server error', (done) => {
+    chai.request(app)
+    .post(`/User/like/${a}`)
+    .end((err, res) => {
+    //   console.log(res)
+      expect(res.statusCode).to.equal(500);
+    //   expect(res.body.message).to.include("");
+      done();
+    });
+  });
+  
+// =============================
   
         describe('update blog info', () => {
             it('it should update blog info', (done) => {
@@ -143,5 +181,17 @@ describe("Blog API test", () => {
                 });
             });
         });
+
+
+        it('Blog  not found', (done) => {
+    chai.request(app)
+        .delete('/Blog/deleteblog/123')
+        .set({ "Authorization": `Bearer ${token}` })
+        .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body.message).to.equal("Bad request");
+            done();
+        });
+});
 
 })

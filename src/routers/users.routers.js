@@ -161,6 +161,29 @@ router.put("/UpdateUser/:id",UserControl.UpdateUser)
 
 
 router.delete("/deleteUser/:id",verifyToken,isAdmin,UserControl.deleteUser)
+
+
+/**
+ * @swagger
+ *
+ * /User/findUserById/{id}:
+ *    get:
+ *      tags: [Users]
+ *      security:
+ *         - BearerAuth: []
+ *      summary: Get User by Id
+ *      parameters:
+ *      - name: id
+ *        in: path
+ *      responses:
+ *        "201":
+ *          description: comment blog successfuly
+ *        "400":
+ *          description: Bad request
+ *        "500":
+ *          description: There is an internal server error
+ *
+ */
 router.get("/findUserById/:id",UserControl.findUserById)
 
 /**
@@ -255,6 +278,28 @@ router.post("/like/:id",UserControl.Like)
 
 router.post("/comment/:id",UserControl.Comment)
 
+
+// /**
+//  * @swagger
+//  *
+//  * /User/getblog/{id}:
+//  *    get:
+//  *      tags: [Users]
+//  *      security:
+//  *         - BearerAuth: []
+//  *      summary: Get Blog by Id
+//  *      parameters:
+//  *      - name: id
+//  *        in: path
+//  *      responses:
+//  *        "201":
+//  *          description: comment blog successfuly
+//  *        "400":
+//  *          description: Bad request
+//  *        "500":
+//  *          description: There is an internal server error
+//  *
+//  */
 router.get("/getblog/:id",UserControl.getBlogId)
 
 

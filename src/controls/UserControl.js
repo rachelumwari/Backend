@@ -50,32 +50,41 @@ static async signup(req,res){
 static async Like(req,res){
     try {
         const modelid = req.params.id
-        const findData = await likes.findOne({
-            where: {blogId:modelid}
+        const findBlog = await blogs.findOne({
+            where: {id:modelid}
         });
           
-        if(findData){
-           let like = findData.like+1
-            const updatedata = await likes.update({
-                like:like
-                
-            }, {where: {blogId:modelid}, returning: true })
-
-            res.status(200).json({
-                status: 200,
-                message:"like and update complent",
-                data:updatedata
+        if(findBlog){
+            const findData = await likes.findOne({
+                where: {blogId:modelid}
             });
-        }else{
-            const createLike = await likes.create({
-                like:1,
-                blogId:modelid
-            })
+            if(findData){
+                
+                let like = findData.like+1
+                 const updatedata = await likes.update({
+                     like:like
+                     
+                 }, {where: {blogId:modelid}, returning: true })
+     
+                 res.status(200).json({
+                     status: 200,
+                     message:"like and update complent",
+                     data:updatedata
+                 });
+            }
+            else{
 
-            res.status(200).json({
-                status: 200,
-                message:"like and update complent",
-                data:createLike
+                const createLike = await likes.create({
+                    like:1,
+                    blogId:modelid
+                })
+            }
+        }else{
+
+            res.status(404).json({
+                status: 404,
+                message:"Blog not found",
+                // data:createLike
             });
         }
     } catch (error) {
@@ -293,8 +302,8 @@ static async Login(req, res){
 
     static async getBlogId(req, res){
         try {
-            // const blog =await blogs.findOne()/;
-            const UserData=await users.findOne({
+            const modelId =req.params.id
+            const UserData=await blogs.findOne({
                 where:{id:modelId}
               })
               return res.status(200).json({
