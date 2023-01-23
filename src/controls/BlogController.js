@@ -1,6 +1,7 @@
 import Models from  "../db/models"
-const {blogs,comments}=Models;  
+const {blogs,comments,likes}=Models;  
 import { Sequelize } from "sequelize";
+// import likes from "../db/models/likes";
 
 class BlogController{
 
@@ -111,6 +112,30 @@ static async getBlog(req, res) {
         const findBlog = await blogs.findOne({
             where: { id: modelId}
         });
+        const findLike = await likes.findAll({
+            where:{"blogId":modelId}
+        })
+        const findComments = await comments.findAll({
+            where:{"blogId":modelId}
+        })
+        if(findComments){
+            for(let i=0; i<findComments.length;i++){
+                await comments.destroy({
+                    where:{
+                        "blogId":findComments[i].blogId
+                    }
+                })
+            }
+        }
+        if(findLike){
+            for(let i=0; i<findLike.length;i++){
+                await likes.destroy({
+                    where:{
+                        "blogId":findLike[i].blogId
+                    }
+                })
+            }
+        }
         if(findBlog){
             const deleteDate = await blogs.destroy({
                 where: {id:modelId}
