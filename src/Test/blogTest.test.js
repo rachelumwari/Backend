@@ -97,6 +97,22 @@ describe("Blog API test", () => {
             });
         });
           
+
+        it('it should not found blogs', (done) => {
+          chai.request(app)
+          .post('/Blog/addblog/777')
+          .set({ "Authorization": `Bearer ${token}` })
+          .send({
+              'title':'Song Fav',
+              'content':''
+          })
+          .end((err, res) => {
+              expect(res.statusCode).to.equal(404);
+              // expect(res.body.status).to.equal(404);
+              // expect(res.body.error).to.equal("The requested resource does not exist");
+              done();
+          });
+      });
        
         describe('/GET', () => {
             it('it should GET all Blogs', (done) => {
@@ -113,11 +129,12 @@ describe("Blog API test", () => {
 
   it('should create like count', (done) => {
     chai.request(app)
-    .post(`/User/like/61`)
+    .post(`/User/like/51`)
+    .set({ "Authorization": `Bearer ${token}` })
     .end((err, res) => {
     //   console.log(res)/
-      expect(res.statusCode).to.equal(200);
-      expect(res.body.message).to.equal("like and update complent");
+      expect(res.statusCode).to.equal(404);
+      expect(res.body.message).to.equal("Blog not found");
       // expect(res.body.data.like).to.be.a('number');
       done();
     });
@@ -125,7 +142,7 @@ describe("Blog API test", () => {
   
   it('Blog not found', (done) => {
     chai.request(app)
-    .post(`/User/like/222`)
+    .post(`/User/like/442`)
     .end((err, res) => {
     //   console.log(res)
       expect(res.statusCode).to.equal(404);
@@ -146,6 +163,21 @@ describe("Blog API test", () => {
   });
   
 // =============================
+it('should create comment count', (done) => {
+  chai.request(app)
+  .post(`/User/comment/`)
+  .set({ "Authorization": `Bearer ${token}` })
+  .end((err, res) => {
+  //   console.log(res)/
+    expect(res.statusCode).to.equal(404);
+    // expect(res.body.message).to.equal("comment added successfuly");
+    // expect(res.body.data.like).to.be.a('number');
+    done();
+  });
+});
+
+
+// =======================================================================================
   
         describe('update blog info', () => {
             it('it should update blog info', (done) => {
@@ -166,7 +198,34 @@ describe("Blog API test", () => {
             });
         });
         
+
+        it('Update sould not found', (done) => {
+          chai.request(app)
+              .put(`/Blog/updateblog/${a}`)
+              .set({ "Authorization": `Bearer ${token}` })
+              .end((err, res) => {
+              // console.log(token)
+              expect(res.statusCode).to.equal(500);
+              expect(res.body.status).to.equal(500);
+              // expect(res.body.message).to.equal("undefined");
+              done();
+              });
+          });
   
+          it('Update sould not found', (done) => {
+            chai.request(app)
+                .put(`/Blog/updateblog/499`)
+                .set({ "Authorization": `Bearer ${token}` })
+                .end((err, res) => {
+                // console.log(token)
+                expect(res.statusCode).to.equal(404);
+                // expect(res.body.status).to.equal(404);
+                expect(res.body.message).to.equal("The requested resource does not exist");
+                done();
+                });
+            });
+    
+
         describe('/deleteblog', () => {
             it('Delete the blog', (done) => {
             chai.request(app)

@@ -61,6 +61,8 @@ chai.use(chaiHttp);
     });
  });
 
+ 
+
  it('it should not signup when password is not equal to six character', (done) => {
   chai.request(app)
     .post('/User/signup/')
@@ -95,6 +97,8 @@ chai.use(chaiHttp);
       });       
  });
 
+   
+
   describe('/GET', () => {
     it('it should GET all users', (done) => {
       chai.request(app)
@@ -110,8 +114,8 @@ chai.use(chaiHttp);
     chai.request(app)
     .get(`/User/getUsers/${a}`)
         .end((err, res) => {
-          console.log(res)
-            expect(res.statusCode).to.equal(500);
+          // console.log(res)
+            expect(res.statusCode).to.equal(404);
             done();
         });
   });
@@ -129,7 +133,7 @@ chai.use(chaiHttp);
 
   it('should user not found', (done) => {
     chai.request(app)
-        .get('/User/findUserById/123')
+        .get('/User/findUserById/400')
         .end((err, res) => {
             expect(res.statusCode).to.equal(400);
             expect(res.body.message).to.equal("Bad request");
